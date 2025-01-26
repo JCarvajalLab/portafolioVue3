@@ -1,25 +1,48 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import AboutmeComponent from '../components/AboutmeComponent.vue';
+import ExperienceComponent from '../components/ExperienceComponent.vue';
+import ProyectsComponent from '../components/ProyectsComponent.vue';
+import SkillsComponent from '../components/SkillsComponent.vue';
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
   },
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+    component: AboutmeComponent,
+  },
+  {
+    path: '/experience',
+    name: 'experience',
+    component: ExperienceComponent,
+  },
+  {
+    path: '/projects',
+    name: 'projects',
+    component: ProyectsComponent,
+  },
+  {
+    path: '/skills',
+    name: 'skills',
+    component: SkillsComponent,
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { top: 0, behavior: 'smooth' };
+    }
+  },
+});
 
-export default router
+export default router;
